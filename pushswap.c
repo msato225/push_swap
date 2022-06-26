@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct    s_node
 {
@@ -131,16 +132,85 @@ void    swap_a()
         tmp1->num = tmp2->num;
         tmp2->num = tmp;
     }
+}
 
-    // tmp1->next = tmp1;
-    // tmp1->prev = tmp1;
+void    swap_b()
+{
+    printf(" [ sb ]\n");
+    t_node *tmp1;
+    t_node *tmp2;
+    int     tmp;
 
-    // tmp1->next = stack_a;
-    // tmp1->prev = stack_a->prev;
-    // stack_a->prev->next = tmp;
-    // stack_a->prev = tmp;
+    if (stack_b == NULL)
+        return ;
+    tmp1 = stack_b;
+    tmp2 = tmp1->next;
 
-    // stack_a = tmp;
+    if (tmp1 == tmp2)
+        return ;
+    else
+    {
+        tmp = tmp1->num;
+        tmp1->num = tmp2->num;
+        tmp2->num = tmp;
+    }
+}
+
+void    swap_ab()
+{
+    printf(" [ ss ]\n");
+    swap_a();
+    swap_b();
+}
+
+void    rotate_a()
+{
+	printf(" [ ra ]\n");
+
+	if (stack_a == NULL)
+		return ;
+	stack_a = stack_a->next;
+}
+
+void    rotate_b()
+{
+	printf(" [ rb ]\n");
+
+	if (stack_b == NULL)
+		return ;
+	stack_b = stack_b->next;
+}
+
+void	rotate_ab()
+{
+    printf(" [ rr ]\n");
+    rotate_a();
+    rotate_b();
+}
+
+void    rrotate_a()
+{
+	printf(" [ rra ]\n");
+
+	if (stack_a == NULL)
+		return ;
+	stack_a = stack_a->prev;
+}
+
+void    rrotate_b()
+{
+	printf(" [ rrb ]\n");
+
+	if (stack_b == NULL)
+		return ;
+	stack_b = stack_b->prev;
+}
+
+void    rrotate_ab()
+{
+    printf(" [ rrr ]\n");
+    rrotate_a();
+    rrotate_b();
 }
 
 int        main(int argc, char *argv[])
@@ -189,12 +259,24 @@ int        main(int argc, char *argv[])
     // === execute ===
     check();
     push_b();
+    push_b();
+    push_b();
     check();
-    push_b();
-    push_b();
-    push_a();
+    rotate_a();
+	check();
+    rrotate_a();
     check();
     swap_a();
+    check();
+    swap_b();
+    check();
+	rotate_b();
+	check();
+    rrotate_b();
+    check();
+    rrotate_ab();
+    check();
+    swap_ab();
     check();
 }
 
